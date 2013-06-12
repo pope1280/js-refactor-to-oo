@@ -14,7 +14,7 @@ Die.prototype.roll = function() {
 
 
 
-// DOM Related ..... should these be prototypical? //
+// DOM Related ..... should these be Die prototypes? //
 
 function addDieToDom() {
   $('.dice').append('<div class="die">0</div>');
