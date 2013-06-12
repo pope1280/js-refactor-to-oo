@@ -40,7 +40,7 @@ $(document).ready(function() {
   });
 
   $('#roller button.roll').on('click', function() {
-    for (var k = 0; k < dice.length; k++)
+    for (var k=0; k < dice.length; k++)
     {
     var die = dice[k];
     var value = die.roll();
