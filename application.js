@@ -1,11 +1,9 @@
 
 // Die related //
 
-function Die(index, sides) {
-  this.index = index;
+function Die(sides) {
   this.sides = sides;
   this.value = 0;
-  addDieToDom();
 }
 
 Die.prototype.roll = function() {
@@ -16,35 +14,59 @@ Die.prototype.roll = function() {
 
 // DOM Related ..... should these be Die prototypes? //
 
-function addDieToDom() {
-  $('.dice').append('<div class="die">0</div>');
+
+function Bag() {
+  this.dice = [];
 }
 
-function updateDomDieValue(k, value) {
-  var domIndex = k+1;
-  $('.dice').find('.die:nth-child('+domIndex+')').text(value);
+Bag.prototype.addDie = function(sides) {
+  var die = new Die(sides);
+  this.dice.push(die);
 }
 
-
+Bag.prototype.shakeDie = function() {
+  $.each(this.dice, function(index, die) {
+    die.roll();
+  });
+}
 
 // Event listeners //
 
 $(document).ready(function() {
-  var dice = [];
-  var index = 0;
+
+  function addDieToDom() {
+    $('.dice').append('<div class="die">0</div>');
+  }
+
+  function updateDomDieValue(k, value) {
+    var domIndex = k+1;
+    $('.dice').find('.die:nth-child('+domIndex+')').text(value);
+  }
+
+  var bag = new Bag();
+  
 
   $('#roller button.add').on('click', function() {
-    var die = new Die(index, 6);
-    dice.push(die);
-    index++;
+    bag.addDie(6);
+    addDieToDom();
   });
 
   $('#roller button.roll').on('click', function() {
-    for (var k=0; k < dice.length; k++)
+    bag.shakeDie();
+    for (var k=0; k < bag.dice.length; k++)
     {
-    var die = dice[k];
-    var value = die.roll();
-    updateDomDieValue(k, value);
+      updateDomDieValue(k, bag.dice[k].value);
     }
   });
+});
+
+
+// When I shake the die, none are 0;
+var bag = new Bag();
+bag.addDie(12);
+bag.shakeDie();
+
+console.log("SHAKE IT!");
+$.each(bag.dice, function() {
+  console.log(this.value != 0);
 });
