@@ -1,4 +1,3 @@
-
 // Die related //
 
 function Die(sides) {
@@ -12,7 +11,7 @@ Die.prototype.roll = function() {
 
 
 
-// DOM Related ..... should these be Die prototypes? //
+// Die "Bag" Related //
 
 
 function Bag() {
@@ -61,6 +60,7 @@ $(document).ready(function() {
 });
 
 
+// Driver(ish) Code //
 // When I shake the die, none are 0;
 var bag = new Bag();
 bag.addDie(12);
