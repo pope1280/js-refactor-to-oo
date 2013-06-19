@@ -60,7 +60,7 @@ $(document).ready(function() {
 });
 
 
-// Driver(ish) Code //
+// Driver(ish) Code (in console) //
 // When I shake the die, none are 0;
 var bag = new Bag();
 bag.addDie(12);
